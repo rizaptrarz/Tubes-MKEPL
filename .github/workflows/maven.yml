@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: write
+
 jobs:
   ci-cd:
     runs-on: ubuntu-latest
@@ -22,7 +25,7 @@ jobs:
           cache: maven
 
       # ==========================================
-      # Continuous Integration - Riza 
+      # Continuous Integration - Riza
       # ==========================================
       - name: Continuous Integration - Build Project (Riza)
         run: mvn clean compile
@@ -40,16 +43,16 @@ jobs:
           name: test-reports
           path: target/surefire-reports/
 
-            # ==========================================
+      # ==========================================
       # Continuous Inspection - Hafidz Zuhayrsh
       # ==========================================
       - name: Continuous Inspection - Verify Project (Hafidz Zuhayrsh)
         run: mvn verify
 
       # ==========================================
-      # Continuous Deployment/Delivery - Gamaliel Pradana Pangestu
+      # Continuous Deployment/Delivery - Gama Pradana
       # ==========================================
-        - name: Continuous Deployment/Delivery - Package JAR
+      - name: Continuous Deployment/Delivery - Package JAR
         run: mvn package
 
       - name: Prepare Release Artifact
