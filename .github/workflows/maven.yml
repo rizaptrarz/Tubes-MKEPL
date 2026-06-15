@@ -21,28 +21,16 @@ jobs:
           java-version: '23'
           cache: maven
 
-      - name: Continuous Integration - Build Project
+      # ==========================================
+      # Continuous Integration - Riza 
+      # ==========================================
+      - name: Continuous Integration - Build Project (Riza)
         run: mvn clean compile
-
-    
-      - name: Continuous Inspection - Verify Project
-        run: mvn verify
-
-      - name: Continuous Delivery - Package JAR
-        run: mvn package
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: TUBESMKEPL-JAR
-          path: target/*.jar
-
-
 
       # ==========================================
       # Continuous Testing - Syahdan Mansiz Kurniawan
       # ==========================================
-      - name: Continuous Testing - Run Unit Tests
+      - name: Continuous Testing - Run Unit Tests (Syahdan)
         run: mvn test
 
       - name: Upload Test Reports
@@ -52,5 +40,20 @@ jobs:
           name: test-reports
           path: target/surefire-reports/
 
+            # ==========================================
+      # Continuous Inspection - Hafidz Zuhayrsh
+      # ==========================================
+      - name: Continuous Inspection - Verify Project (Hafidz Zuhayrsh)
+        run: mvn verify
 
+      # ==========================================
+      # Continuous Delivery - Package Application
+      # ==========================================
+      - name: Continuous Delivery - Package JAR
+        run: mvn package
 
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TUBESMKEPL-JAR
+          path: target/*.jar
