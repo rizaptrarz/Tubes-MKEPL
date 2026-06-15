@@ -13,7 +13,7 @@ public class LoginTest {
 
         boolean result = Login.validasiLogin(userMap, "admin", "12345");
 
-        assertTrue(result, "Login harusnya berhasil dengan kredensial yang benar");
+        assertFalse(result, "Sengaja disalahkan untuk demo Syahdan");
     }
 
     @Test
