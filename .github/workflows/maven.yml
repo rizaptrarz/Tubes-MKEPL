@@ -47,13 +47,28 @@ jobs:
         run: mvn verify
 
       # ==========================================
-      # Continuous Delivery - Package Application
+      # Continuous Deployment/Delivery - Gamaliel Pradana Pangestu
       # ==========================================
-      - name: Continuous Delivery - Package JAR
+        - name: Continuous Deployment/Delivery - Package JAR
         run: mvn package
 
-      - name: Upload Artifact
+      - name: Prepare Release Artifact
+        run: |
+          mkdir release
+          cp target/*.jar release/TUBESMKEPL-${{ github.run_number }}.jar
+
+      - name: Upload Deployment Artifact
         uses: actions/upload-artifact@v4
         with:
           name: TUBESMKEPL-JAR
-          path: target/*.jar
+          path: release/*.jar
+
+      - name: Continuous Deployment/Delivery - Create GitHub Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          name: Release v1.0.${{ github.run_number }}
+          files: release/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
