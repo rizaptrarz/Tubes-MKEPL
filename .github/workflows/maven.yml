@@ -46,8 +46,15 @@ jobs:
       # ==========================================
       # Continuous Inspection - Hafidz Zuhayrsh
       # ==========================================
-      - name: Continuous Inspection - Verify Project (Hafidz Zuhayrsh)
-        run: mvn verify
+      - name: Continuous Inspection - Verify and Analyze (Hafidz)
+
+        env:
+
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=rizaptrarz_Tubes-MKEPL
 
       # ==========================================
       # Continuous Deployment/Delivery - Gama Pradana
